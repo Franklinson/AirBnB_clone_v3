@@ -10,12 +10,14 @@ from api.v1.views import app_views
 
 @app_views.route('/states', methods=['GET'])
 def get_states():
+    """retrieve a json state object"""
     states = [state.to_dict() for state in storage.all(State).values()]
     return jsonify(states)
 
 
 @app_views.route('/states/<state_id>', methods=['GET'])
 def get_state(state_id):
+    """retrieves state obj by state_id"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
@@ -24,6 +26,7 @@ def get_state(state_id):
 
 @app_views.route('/states/<state_id>', methods=['DELETE'])
 def delete_state(state_id):
+    """deletes a state object"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
@@ -34,6 +37,7 @@ def delete_state(state_id):
 
 @app_views.route('/states', methods=['POST'])
 def create_state():
+    """creates a state object"""
     if not request.json:
         abort(400, 'Not a JSON')
     data = request.get_json()
@@ -47,6 +51,7 @@ def create_state():
 
 @app_views.route('/states/<state_id>', methods=['PUT'])
 def update_state(state_id):
+    """updates a state object"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
