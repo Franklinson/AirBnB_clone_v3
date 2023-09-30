@@ -154,6 +154,7 @@ EOF  all  create  destroy  help  quit  show  update
 No known bugs at this time. 
 
 ## Authors
+Isabel Kikuvi - [Github](https://github.com/Isabel-Kikuvi) 
 Franklin Hassey Etsey - [Github](https://github.com/Franklinson) / [Twitter](https://twitter.com/HasseyFranklin)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
 
