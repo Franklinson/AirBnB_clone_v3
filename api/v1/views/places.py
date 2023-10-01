@@ -9,7 +9,8 @@ from models.place import Place
 from api.v1.views import app_views
 
 
-@app_views.route('/cities/<city_id>/places' strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', methods=['GET'],
+                 strict_slashes=False)
 def get_city_places(city_id):
     """Get place"""
     city = storage.get(City, city_id)
