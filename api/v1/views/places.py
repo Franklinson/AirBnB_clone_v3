@@ -3,7 +3,7 @@
 This is the place model
 """
 from api.v1.views import app_views
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, make_response
 from models import storage
 from models.place import Place
 
@@ -49,12 +49,12 @@ def create_place(city_id):
     if city is None:
         abort(404)
     if not request.get_json():
-        return jsonify({"error": "Not a JSON"}), 400
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     # data = request.get_json()
     if 'user_id' not in request.get_json():
-        return jsonify({"error": "Missing user_id"}), 400
+        return make_response(jsonify({"error": "Missing user_id"}), 400)
     if 'name' not in request.get_json():
-        return jsonify({"error": "Missing name"}), 400
+        return make_response(jsonify({"error": "Missing name"}), 400)
     # user_id = data['user_id']
     data = request.get_json()
     data['city_id'] = city_id
@@ -76,7 +76,7 @@ def update_place(place_id):
     if place is None:
         abort(404)
     if not request.get_json():
-        return jsonify({"error": "Not a JSON"}), 400
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     data = request.get_json()
     for key, value in data.items():
         if key not in ['id', 'user_id', 'city_id', 'created_at', 'updated_at']:
