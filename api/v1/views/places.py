@@ -2,11 +2,10 @@
 """
 This is the place model
 """
-
+from api.v1.views import app_views
 from flask import Flask, jsonify, request, abort
 from models import storage
 from models.place import Place
-from api.v1.views import app_views
 
 
 @app_views.route('/cities/<string:city_id>/places', methods=['GET'],
@@ -69,7 +68,8 @@ def create_place(city_id):
     return jsonify(place.to_dict()), 201
 
 
-@app_views.route('/places/<string:place_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/places/<string:place_id>', methods=['PUT'],
+                 strict_slashes=False)
 def update_place(place_id):
     """Update place"""
     place = storage.get(Place, place_id)
