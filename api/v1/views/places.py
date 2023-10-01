@@ -54,7 +54,7 @@ def create_place(city_id):
     if 'user_id' not in data:
         abort(400, description="Missing user_id")
     if 'name' not in data:
-        abort(400, description=""Missing name"")
+        abort(400, description="Missing name")
     user_id = data['user_id']
     user = storage.get(User, user_id)
     if user is None:
