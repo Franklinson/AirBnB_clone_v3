@@ -76,10 +76,16 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        """Retrieve one object based on class and ID"""
+        """Retrieve one object based on class and ID
         if cls and id:
             key = "{}.{}".format(cls.__name__, id)
             return self.all(cls).get(key)
+        """
+        if cls in classes.values() and id and type(id) == str:
+            object = self.all(cls)
+            for key, value in object.items():
+                if key.split(".")[1] == id:
+                    return value
 
     def count(self, cls=None):
         """Count the number of objects in storage matching the given class"""
