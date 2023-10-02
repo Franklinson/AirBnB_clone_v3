@@ -11,7 +11,7 @@ from models.city import City
 from models.user import User
 
 
-@app_views.route('/cities/<city_id>/places' strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', strict_slashes=False)
 def get_city_places(city_id):
     """Get place"""
     city = storage.get(City, city_id)
@@ -55,7 +55,7 @@ def create_place(city_id):
     if 'user_id' not in data:
         abort(400, description="Missing user_id")
     if 'name' not in data:
-        abort(400, description=""Missing name"")
+        abort(400, description="Missing name")
     user_id = data['user_id']
     user = storage.get(User, user_id)
     if user is None:

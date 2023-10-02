@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""app.py file"""
+"""app module """
 
 from flask import Flask, make_response, jsonify
 from models import storage
