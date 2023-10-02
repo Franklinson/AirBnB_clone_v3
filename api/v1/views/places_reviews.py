@@ -1,6 +1,5 @@
 #!/usr/bin/python
-"""This is the place model
-"""
+"""This is the place_reviews model"""
 
 from flask import Flask, jsonify, request, abort
 from models import storage

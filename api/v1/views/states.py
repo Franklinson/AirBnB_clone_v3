@@ -2,7 +2,7 @@
 """
 This is the state model
 """
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort
 from models import storage
 from models.state import State
 from api.v1.views import app_views
@@ -37,27 +37,27 @@ def delete_state(state_id):
     return jsonify({}), 200
 
 
-@app_views.route('/states', methods=['POST'])
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
     """creates a state object"""
     if not request.get_json():
-        return make_response(jsonify({"error": "Not a JSON"}), 400)
+        abort(400, description="Not a JSON")
     data = request.get_json()
     if 'name' not in data:
-        return make_response(jsonify({"error": "Missing name"}), 400)
+        abort(400, description="Missing name")
     state = State(**data)
     state.save()
     return jsonify(state.to_dict()), 201
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'])
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """updates a state object"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
     if not request.get_json():
-        return make_response(jsonify({"error": "Not a JSON"}), 400)
+        abort(400, description="Not a JSON")
     data = request.get_json()
     for key, value in data.items():
         if key not in ['id', 'created_at', 'updated_at']:
