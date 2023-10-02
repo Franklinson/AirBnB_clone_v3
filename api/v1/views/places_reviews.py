@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """This is the place_reviews model"""
 
 from flask import Flask, jsonify, request, abort
